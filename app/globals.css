@@ -1,32 +1,6 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -37,13 +11,67 @@ body {
   margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html,
+body {
+  max-width: 100vw;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* Only on <body>, so it passes to the window. On <html> too, it would keep
+   <body>'s overflow from passing to the window, so the `overflow: hidden`
+   that menus and dialogs put on <body> to lock scrolling would make <body> a
+   scroll container at the top of the page, taking the sticky header with it.
+   Not `hidden`, for the same reason. */
+body {
+  overflow-x: clip;
+}
+
+/* next-themes puts the resolved theme's class on <html>. */
+.dark .light-only,
+.light .dark-only {
+  display: none;
+}
+
+.radix-themes {
+  --default-font-family: var(--font-inter);
+
+  --font-weight-bold: 600;
+}
+
+.rt-r-size-1 {
+  font-variation-settings: "opsz" 16;
+}
+.rt-r-size-2 {
+  font-variation-settings: "opsz" 20;
+}
+.rt-r-size-3 {
+  font-variation-settings: "opsz" 24;
+}
+.rt-r-size-4 {
+  font-variation-settings: "opsz" 26;
+}
+.rt-r-size-5 {
+  font-variation-settings: "opsz" 28;
+}
+.rt-r-size-6 {
+  font-variation-settings: "opsz" 30;
+}
+.rt-r-size-7,
+.rt-r-size-8,
+.rt-r-size-9 {
+  font-variation-settings: "opsz" 32;
+}
+
+.rt-TableColumnHeaderCell {
+  font-weight: var(--font-weight-bold);
+}
+
+.rt-BaseButton {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Menus and dialogs render in portals after the app, with no z-index of their
+   own. Keeping the app's z-indexes, such as the sticky header's, inside it
+   leaves those portals on top. */
+.radix-themes[data-is-root-theme="true"] {
+  isolation: isolate;
 }
