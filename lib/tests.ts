@@ -1,3 +1,4 @@
+import dentistry from "@/data/dentistry.json";
 import fissureSealing from "@/data/fissure-sealing.json";
 
 export type Question = {
@@ -34,7 +35,7 @@ function fromData(data: TestData): Test {
   };
 }
 
-export const tests: Test[] = [fromData(fissureSealing)];
+export const tests: Test[] = [fromData(fissureSealing), fromData(dentistry)];
 
 export function getTest(id: string): Test | undefined {
   return tests.find((test) => test.id === id);
