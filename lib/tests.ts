@@ -1,5 +1,8 @@
 import dentistry from "@/data/dentistry.json";
+import endodonticInstruments from "@/data/endodontic-instruments.json";
 import fissureSealing from "@/data/fissure-sealing.json";
+import instrumentSterilization from "@/data/instrument-sterilization.json";
+import rotaryInstruments from "@/data/rotary-instruments.json";
 
 export type Question = {
   id: number;
@@ -35,7 +38,13 @@ function fromData(data: TestData): Test {
   };
 }
 
-export const tests: Test[] = [fromData(fissureSealing), fromData(dentistry)];
+export const tests: Test[] = [
+  fromData(fissureSealing),
+  fromData(dentistry),
+  fromData(rotaryInstruments),
+  fromData(instrumentSterilization),
+  fromData(endodonticInstruments),
+];
 
 export function getTest(id: string): Test | undefined {
   return tests.find((test) => test.id === id);
